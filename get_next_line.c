@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 08:11:27 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/24 19:46:59 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2021/11/24 20:13:35 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_fill_buffer(int fd, char *buffer)
 	{
 		ret = read(fd, buffer, BUFFER_SIZE);
 		buffer[ret] = '\0';
-		if ((ret == (-1)) || ret == 0 || temp == 0)
+		if (ret <= 0 || temp == 0)
 		{
 			free(temp);
 			return (NULL);
