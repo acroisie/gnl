@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 08:11:27 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/25 09:06:52 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2021/11/25 09:41:24 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,17 @@ char	*ft_line_split(char *brut_line, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	buffer[BUFFER_SIZE + 1];
-	char		*brut_line;
-	char		*line;
+	static char		buffer[BUFFER_SIZE + 1];
+	char			*brut_line;
+	char			*line;
 
 	brut_line = ft_fill_buffer(fd, buffer);
 	line = ft_line_split(brut_line, buffer);
 	free(brut_line);
+	if (line[0] == '\0')
+	{
+		free(line);
+		return (NULL);
+	}
 	return (line);
 }
