@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 08:11:27 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/24 20:52:10 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2021/11/25 09:06:52 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,7 @@ char	*ft_fill_buffer(int fd, char *buffer)
 		ret = read(fd, buffer, BUFFER_SIZE);
 		buffer[ret] = '\0';
 		if (ret <= 0 || temp == 0)
-		{
-			free(temp);
-			return (NULL);
-		}
+			break ;
 		temp = ft_strjoin(temp, buffer);
 	}
 	return (temp);
@@ -57,8 +54,10 @@ char	*ft_line_split(char *brut_line, char *buffer)
 
 	i = 0;
 	j = 0;
-	while (brut_line[i] != '\n')
+	while (brut_line[i] && (brut_line[i] != '\n'))
 		i++;
+	if (brut_line[i] == '\0')
+		return (line = ft_strndup(brut_line, i));
 	i++;
 	line = ft_strndup(brut_line, i);
 	while (brut_line[i])
