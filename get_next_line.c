@@ -6,7 +6,7 @@
 /*   By: acroisie <acroisie@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 08:11:27 by acroisie          #+#    #+#             */
-/*   Updated: 2021/11/25 10:10:26 by acroisie         ###   ########lyon.fr   */
+/*   Updated: 2022/02/03 11:00:17 by acroisie         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ char	*ft_fill_buffer(int fd, char *buffer)
 	while (!ft_find_end_of_line(temp))
 	{
 		ret = read(fd, buffer, BUFFER_SIZE);
-		buffer[ret] = '\0';
 		if (ret <= 0 || temp == 0)
+		{
+			buffer[ret] = '\0';
 			break ;
+		}
+		buffer[ret] = '\0';
 		temp = ft_strjoin(temp, buffer);
 	}
 	return (temp);
